@@ -6,6 +6,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
+import com.wumeng.jetpackproject.viewmodel.MainActivityViewModel;
+
 /**
  * @author WuMeng
  */
@@ -17,6 +19,12 @@ public class WorkUtil implements LifecycleObserver {
 
     private boolean whetherToCount = true;
 
+    private MainActivityViewModel mainActivityViewModel;
+
+    public WorkUtil(MainActivityViewModel mainActivityViewModel) {
+        this.mainActivityViewModel = mainActivityViewModel;
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void start() {
         new Thread(new Runnable() {
@@ -25,8 +33,8 @@ public class WorkUtil implements LifecycleObserver {
                 while (whetherToCount) {
                     try {
                         Thread.sleep(1000);
-                        count++;
-                        Log.d("WM", "start" + count);
+                        mainActivityViewModel.count++;
+                        Log.d("WM", "start" + mainActivityViewModel.count);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -36,16 +44,15 @@ public class WorkUtil implements LifecycleObserver {
 
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void pause() {
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void stop() {
         whetherToCount = false;
-        Log.d("WM", "pause" + count);
+        Log.d("WM", "stop" + mainActivityViewModel.count);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestory() {
-        count = 0;
-        Log.d("WM", "onDestory" + count);
+        Log.d("WM", "onDestory" + mainActivityViewModel.count);
     }
 
 }
