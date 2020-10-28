@@ -23,21 +23,31 @@ public class LiveDataLifecycle implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onResume() {
-        if (whetherToCount) {
-            Log.d("WM","onResume" + mLiveDataViewModel.count);
-            mLiveDataViewModel.count++;
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (whetherToCount) {
+                    Log.d("WM","onResume" + mLiveDataViewModel.count);
+                    mLiveDataViewModel.count++;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onPause() {
-        whetherToCount = false;
+        // whetherToCount = false;
         Log.d("WM","onPause");
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
-        mLiveDataViewModel.count = 0;
+        // mLiveDataViewModel.count = 0;
         Log.d("WM","onDestroy");
     }
 
