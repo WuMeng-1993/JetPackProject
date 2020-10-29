@@ -27,8 +27,8 @@ public class LiveDataLifecycle implements LifecycleObserver {
             @Override
             public void run() {
                 while (whetherToCount) {
-                    Log.d("WM","onResume" + mLiveDataViewModel.count);
-                    mLiveDataViewModel.count++;
+                    Log.d("WM","onResume" + mLiveDataViewModel.getCount());
+                    mLiveDataViewModel.add();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
