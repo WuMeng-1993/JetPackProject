@@ -11,6 +11,9 @@ import com.wumeng.jetpackproject.R;
 import com.wumeng.jetpackproject.databinding.ActivityLiveDataBinding;
 
 
+/**
+ * @author WuMeng
+ */
 public class LiveDataActivity extends AppCompatActivity {
 
     private ActivityLiveDataBinding mLiveDataBinding;
