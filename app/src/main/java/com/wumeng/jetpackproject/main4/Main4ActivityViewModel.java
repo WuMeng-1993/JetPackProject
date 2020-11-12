@@ -13,7 +13,7 @@ public class Main4ActivityViewModel extends ViewModel {
 
     private LiveData<Student> liveData;
 
-    private MutableLiveData<Student> studentMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Student> studentMutableLiveData = new MutableLiveData<>();
 
     public LiveData<Student> getLiveData() {
         return studentMutableLiveData;

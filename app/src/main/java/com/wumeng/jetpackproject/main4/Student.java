@@ -22,4 +22,37 @@ public class Student {
      */
     private int stuScore;
 
+    public Student() {
+
+    }
+
+    public Student(int stuNumber, String stuName, int stuScore) {
+        this.stuNumber = stuNumber;
+        this.stuName = stuName;
+        this.stuScore = stuScore;
+    }
+
+    public int getStuNumber() {
+        return stuNumber;
+    }
+
+    public void setStuNumber(int stuNumber) {
+        this.stuNumber = stuNumber;
+    }
+
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName;
+    }
+
+    public int getStuScore() {
+        return stuScore;
+    }
+
+    public void setStuScore(int stuScore) {
+        this.stuScore = stuScore;
+    }
 }
