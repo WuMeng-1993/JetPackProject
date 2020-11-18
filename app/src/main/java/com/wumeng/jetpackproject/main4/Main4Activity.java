@@ -41,11 +41,22 @@ public class Main4Activity extends AppCompatActivity {
     }
 
     private void initClick() {
+//        main4Binding.btnSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mStudent.setStuScore(Integer.parseInt(main4Binding.etScore.getText().toString()));
+//                main4ViewModel.setStudentMutableLiveData(mStudent);
+//            }
+//        });
         main4Binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mStudent.setStuScore(Integer.parseInt(main4Binding.etScore.getText().toString()));
-                main4ViewModel.setStudentMutableLiveData(mStudent);
+                main4ViewModel.getStudentMessage(Integer.parseInt(main4Binding.etScore.getText().toString())).observe(Main4Activity.this, new Observer<Student>() {
+                    @Override
+                    public void onChanged(Student student) {
+                        main4Binding.tvStuscore.setText("WM 分数: " + student.getStuScore());
+                    }
+                });
             }
         });
     }
@@ -54,7 +65,14 @@ public class Main4Activity extends AppCompatActivity {
         main4ViewModel.getLiveData().observe(this, new Observer<Student>() {
             @Override
             public void onChanged(Student student) {
-                main4Binding.tvStuscore.setText("分数: " + student.getStuScore());
+                // main4Binding.tvStuscore.setText("分数: " + student.getStuScore());
+            }
+        });
+
+        main4ViewModel.getStuScore().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                main4Binding.tvStuscore.setText("分数:" + integer);
             }
         });
     }
