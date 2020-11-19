@@ -42,4 +42,17 @@ public class Main4ActivityViewModel extends ViewModel {
         return new HttpUtil().getStudent(score);
     }
 
+    private MutableLiveData<Integer> score = new MutableLiveData<>();
+
+    public void setScore(int mScore) {
+        this.score.setValue(mScore);
+    }
+
+    private LiveData<Student> studentMutableLiveData1 = Transformations.switchMap(score, new Function<Integer, LiveData<Student>>() {
+        @Override
+        public LiveData<Student> apply(Integer input) {
+            return getStudentMessage(input);
+        }
+    });
+
 }
